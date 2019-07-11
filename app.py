@@ -3,7 +3,8 @@
 from flask import Flask, jsonify, request, render_template
 app = Flask(__name__)
 
-@app.route('https://tiagof99.github.io/ReelML/hello', methods=['GET', 'POST'])
+
+@app.route('/hello', methods=['GET', 'POST'])
 def hello():
 
     # POST request
@@ -14,11 +15,15 @@ def hello():
 
     # GET request
     else:
-        message = {'greeting':'Hello from Flask!'}
+        message = {'greeting': 'Hello from Flask!'}
         return jsonify(message)  # serialize and use JSON headers
 
-@app.route('https://tiagof99.github.io/ReelML/test')
+
+@app.route('/test')
 def test_page():
     # look inside `templates` and serve `index.html`
     return render_template('index.html')
-#ok
+
+
+if __name__ == "__main__":
+    app.run(debug=True, port=5000)
