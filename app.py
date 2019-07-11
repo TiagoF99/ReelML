@@ -21,3 +21,4 @@ def hello():
 def test_page():
     # look inside `templates` and serve `index.html`
     return render_template('index.html')
+#ok
