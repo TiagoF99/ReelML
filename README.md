@@ -5,7 +5,7 @@ ReelML is an online platform that allows users to input a set of data and then g
 
 ## Stack
 
-'''
+```
 Python
 - Flask
 
@@ -15,4 +15,4 @@ HTML/CSS
 
 JavaScript
 - Fetch
-'''
+```
