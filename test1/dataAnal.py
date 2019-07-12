@@ -1,10 +1,5 @@
-import pandas as pd
-import urllib.request
-from urllib.error import HTTPError
-import csv
 import matplotlib.pyplot as plt
 import pandas as pd
-import pylab as pl
 import numpy as np
 from sklearn import linear_model
 from sklearn.metrics import r2_score
@@ -43,13 +38,17 @@ def process_data():
     # plt.legend(loc="best")
     # plt.show()
 
-    return popt
+    acc = r2_score(y, func(x, popt[0], popt[1], popt[2]))
+
+    return {"param": popt, "acc": acc}
 
 
-def prediction(score: float) -> float:
+def prediction(score: float):
     """
     gets the required parameters and returns the predicted gross value according to this
     :return:
     """
-    paramters = process_data()
-    return func(score, paramters[0], paramters[1], paramters[2])
+    print(1)
+    data = process_data()
+    paramters = data["param"]
+    return {"pred": func(score, paramters[0], paramters[1], paramters[2]), "acc": data["acc"]}

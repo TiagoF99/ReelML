@@ -11,8 +11,19 @@ function gross_by_score() {
             }).then(function (response) {
                 return response.text();
             }).then(function (text) {
-                console.log('POST response: ');
-                // Should be 'OK' if everything was successful
-                document.getElementById("title").innerHTML = "<div>" + text + "</div>";
+                console.log(text)
+                for (i = 0; i < text.length; i++) {
+                    if (i != 0 || i != text.length - 1) {
+                        if (text[i] == "'") {
+                            text = text.replace("'", "\"")
+                        }
+                    }
+                }
+                text = text.replace("'", "\"")
+                console.log(text)
+                let data = JSON.parse(text);
+                console.log(data)
+                document.getElementById("prediction").innerHTML = "<div>" + data.pred.toString() + "</div>";
+                document.getElementById("accuracy").innerHTML = "<div>" + (data.acc*100).toString() + "</div>";
             });
         }

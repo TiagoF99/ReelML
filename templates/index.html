@@ -7,11 +7,13 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}">
     <title>Hello, world!</title>
   </head>
   <body>
     <div>input the imdb score and you will get a predicted gross value</div>
-    <h1 id="title"></h1>
+    <h1 id="prediction"></h1>
+    <div>This model is predicted with:<span id="accuracy">__</span>% accuracy</div>
     <input id="num1">
     <button onclick="gross_by_score()">CLICK ME!</button>
 
