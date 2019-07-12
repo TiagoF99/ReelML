@@ -2,15 +2,54 @@ import pandas as pd
 import urllib.request
 from urllib.error import HTTPError
 import csv
+import matplotlib.pyplot as plt
+import pandas as pd
+import pylab as pl
+import numpy as np
+from sklearn import linear_model
+from sklearn.metrics import r2_score
+from scipy.optimize import curve_fit
 
 
-pd.set_option('display.max_columns', None)
-df = pd.read_csv("movie.csv")
+def func(x, a, b, c):
+    return a * np.exp(b * x) + c
 
-df.drop(labels=["actor_3_facebook_likes", "actor_2_name", "actor_1_facebook_likes", "actor_1_name", "num_voted_users",
-                "cast_total_facebook_likes", "actor_3_name", "facenumber_in_poster", "movie_imdb_link",
-                "num_user_for_reviews", "actor_2_facebook_likes", "aspect_ratio", "color", "num_critic_for_reviews",
-                "director_facebook_likes"], axis=1, inplace=True)
-df.dropna(subset=["gross"], axis=0, inplace=True)
-print(df.columns)
-print(df.head())
+
+def process_data():
+    """
+    take in the csv, clean the data, fit the data to a model and then return the parameters
+    :return:
+    """
+    pd.set_option('display.max_columns', None)
+    df = pd.read_csv("test1/movie.csv")
+
+    df.drop(labels=["actor_3_facebook_likes", "actor_2_name", "actor_1_facebook_likes", "actor_1_name", "num_voted_users",
+                    "cast_total_facebook_likes", "actor_3_name", "facenumber_in_poster", "movie_imdb_link",
+                    "num_user_for_reviews", "actor_2_facebook_likes", "aspect_ratio", "color", "num_critic_for_reviews",
+                    "director_facebook_likes"], axis=1, inplace=True)
+    df.dropna(subset=["gross"], axis=0, inplace=True)
+
+    x = df["imdb_score"]
+    y = df["gross"]
+    # plt.scatter(x, y, color='blue', label="data")
+    # plt.xlabel("imdb_score")
+    # plt.ylabel("gross")
+
+    # need to fit an exponential data set
+    popt, pcov = curve_fit(func, x, y)
+    # popt is parameters
+    # X = np.arange(0.0, 10.0, 0.1)
+    # plt.plot(X, func(X, popt[0], popt[1], popt[2]), 'r-', label="fit")
+    # plt.legend(loc="best")
+    # plt.show()
+
+    return popt
+
+
+def prediction(score: float) -> float:
+    """
+    gets the required parameters and returns the predicted gross value according to this
+    :return:
+    """
+    paramters = process_data()
+    return func(score, paramters[0], paramters[1], paramters[2])

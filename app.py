@@ -1,7 +1,8 @@
 # docs @ http://flask.pocoo.org/docs/1.0/quickstart/
-
+from test1 import dataAnal
 from flask import Flask, jsonify, request, render_template
 app = Flask(__name__)
+
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
@@ -9,13 +10,14 @@ def add():
     # POST request
     if request.method == 'POST':
         nums = request.get_json()
-        print(nums)
-        return str(int(nums['a']) + int(nums['str']))
+        # must return a string value and note nums is a dict of strings
+        return str(dataAnal.prediction(float(nums['score'])))
 
     # GET request
     else:
         message = {'greeting': 'Hello from Flask!'}
         return jsonify(message)  # serialize and use JSON headers
+
 
 @app.route('/')
 def test_page():

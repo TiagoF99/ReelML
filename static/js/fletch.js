@@ -1,6 +1,5 @@
-function add() {
+function gross_by_score() {
         x = document.getElementById('num1').value;
-        y = document.getElementById('num2').value;
 
         fetch('/add', {
             method: 'post',
@@ -8,7 +7,7 @@ function add() {
               'Accept': 'application/json, text/plain, */*',
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({a: x, str: y})
+            body: JSON.stringify({score: x})
             }).then(function (response) {
                 return response.text();
             }).then(function (text) {
