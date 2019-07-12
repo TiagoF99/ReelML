@@ -8,6 +8,11 @@ ReelML is an online platform that allows users to input a set of data and then g
 ```
 Python
 - Flask
+- matplotlib.pyplot
+- pandas
+- numpy
+- sklearn
+- scipy.optimize
 
 HTML/CSS
 - Bootstrap
@@ -15,4 +20,7 @@ HTML/CSS
 
 JavaScript
 - Fetch
+
+Machine Learning Algorithms
+- Polynomial Regression
 ```
