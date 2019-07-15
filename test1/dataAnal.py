@@ -1,10 +1,11 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import seaborn as sns
 from sklearn import linear_model
 from sklearn.metrics import r2_score
 from scipy.optimize import curve_fit
-
+from path import Path
 
 def func(x, a, b, c):
     return a * np.exp(b * x) + c
@@ -16,7 +17,7 @@ def process_data():
     :return:
     """
     pd.set_option('display.max_columns', None)
-    df = pd.read_csv("test1/movie.csv")
+    df = pd.read_csv('movie.csv')
 
     df.drop(labels=["actor_3_facebook_likes", "actor_2_name", "actor_1_facebook_likes", "actor_1_name", "num_voted_users",
                     "cast_total_facebook_likes", "actor_3_name", "facenumber_in_poster", "movie_imdb_link",
@@ -24,24 +25,37 @@ def process_data():
                     "director_facebook_likes"], axis=1, inplace=True)
     df.dropna(subset=["gross"], axis=0, inplace=True)
 
-    x = df["imdb_score"]
-    y = df["gross"]
+    x = df['gross']
+    y = df['imdb_score']
+
+    # test['gross'] = pd.cut(df['gross'], 50)
+    # test['imdb_score'] = pd.cut(df['imdb_score'], 50
+
+    # sns.heatmap(test)
+
+    # binnedScore = pd.cut(test.loc('gross'), 50)
+
+    plt.scatter(y, x, 1)
+    plt.show()
+
+    # sns.heatmap(binnedScore, x)
+
     # plt.scatter(x, y, color='blue', label="data")
     # plt.xlabel("imdb_score")
     # plt.ylabel("gross")
-
-    # need to fit an exponential data set
-    popt, pcov = curve_fit(func, x, y)
-    # popt is parameters
+    #
+    # # need to fit an exponential data set
+    # popt, pcov = curve_fit(func, x, y)
+    # # popt is parameters
     # X = np.arange(0.0, 10.0, 0.1)
     # plt.plot(X, func(X, popt[0], popt[1], popt[2]), 'r-', label="fit")
     # plt.legend(loc="best")
     # plt.show()
 
     # metrics.accuracy_score for accuracy
-    acc = r2_score(y, func(x, popt[0], popt[1], popt[2]))
+    # acc = r2_score(y, func(x, popt[0], popt[1], popt[2]))
 
-    return {"param": popt, "acc": acc}
+    # return {"param": popt, "acc": acc}
 
 
 def prediction(score: float):
@@ -53,3 +67,5 @@ def prediction(score: float):
     data = process_data()
     paramters = data["param"]
     return {"pred": func(score, paramters[0], paramters[1], paramters[2]), "acc": data["acc"]}
+
+process_data()
