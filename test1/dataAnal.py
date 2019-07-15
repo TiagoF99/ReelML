@@ -38,6 +38,7 @@ def process_data():
     # plt.legend(loc="best")
     # plt.show()
 
+    # metrics.accuracy_score for accuracy
     acc = r2_score(y, func(x, popt[0], popt[1], popt[2]))
 
     return {"param": popt, "acc": acc}
