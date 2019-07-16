@@ -11,6 +11,7 @@ def add():
     if request.method == 'POST':
         nums = request.get_json()
         # must return a string value and note nums is a dict of strings
+        print(nums)
         return str(dataAnal.prediction(float(nums['score'])))
 
     # GET request

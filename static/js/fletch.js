@@ -21,9 +21,15 @@ function gross_by_score() {
                 }
                 text = text.replace("'", "\"")
                 console.log(text)
-                let data = JSON.parse(text);
-                console.log(data)
-                document.getElementById("prediction").innerHTML = "<div>" + data.pred.toString() + "</div>";
-                document.getElementById("accuracy").innerHTML = "<div>" + (data.acc*100).toString() + "</div>";
+                try {
+                  let data = JSON.parse(text);
+                  console.log(data)
+                  document.getElementById("prediction").innerHTML = "<div>" + data.pred.toString() + "</div>";
+                  document.getElementById("accuracy").innerHTML = "<div>" + (data.acc).toString() + "</div>";
+                }
+                catch(err) {
+                  console.log("invalid input")
+                  document.getElementById("prediction").innerHTML = "<div>Invalid Input</div>";
+                }
             });
         }
