@@ -23,4 +23,5 @@ JavaScript
 
 Machine Learning Algorithms
 - Polynomial Regression
+- KNN
 ```
