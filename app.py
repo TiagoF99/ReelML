@@ -3,6 +3,7 @@ from test1 import dataAnal
 from flask import Flask, jsonify, request, render_template
 app = Flask(__name__)
 
+df1 = dataAnal.gross_by_score()
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
@@ -12,7 +13,7 @@ def add():
         nums = request.get_json()
         # must return a string value and note nums is a dict of strings
         print(nums)
-        return str(dataAnal.prediction(float(nums['score'])))
+        return str(df1.prediction(float(nums['score'])))
 
     # GET request
     else:
