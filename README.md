@@ -24,7 +24,6 @@ Tensorflow
 
 HTML/CSS
 - Bootstrap
-- React
 
 JavaScript
 - Fetch
